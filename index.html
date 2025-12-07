@@ -3,331 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rehab Smart Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Rehab Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            width: 260px;
+        }
+        input {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 10px;
+            text-align: right;
+            font-size: 20px;
+            padding-right: 10px;
+        }
+        button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 10px;
+            background: #eee;
+        }
+        button.operator {
+            background: #ffbb00;
+        }
+        button.equal {
+            background: #00c853;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="calc-container">
-        <h2>Rehab Smart Calculator</h2>
-        <input type="text" id="display" disabled>
-
-        <div class="buttons">
+    <div class="calculator">
+        <input type="text" id="screen" readonly>
+        <div>
             <button onclick="press('7')">7</button>
             <button onclick="press('8')">8</button>
             <button onclick="press('9')">9</button>
-            <button class="op" onclick="press('/')">/</button>
-
+            <button class="operator" onclick="press('/')">/</button>
+        </div>
+        <div>
             <button onclick="press('4')">4</button>
             <button onclick="press('5')">5</button>
             <button onclick="press('6')">6</button>
-            <button class="op" onclick="press('*')">*</button>
-
+            <button class="operator" onclick="press('*')">*</button>
+        </div>
+        <div>
             <button onclick="press('1')">1</button>
             <button onclick="press('2')">2</button>
             <button onclick="press('3')">3</button>
-            <button class="op" onclick="press('-')">-</button>
-
+            <button class="operator" onclick="press('-')">-</button>
+        </div>
+        <div>
             <button onclick="press('0')">0</button>
             <button onclick="press('.')">.</button>
-            <button id="equal" onclick="calculate()">=</button>
-            <button class="op" onclick="press('+')">+</button>
-
-            <button id="clear" onclick="clearDisplay()">مسح</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-<html lang="ar">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>آلة حاسبة مودرن</title>
-<style>
-  :root{
-    --bg1: #0f172a;
-    --bg2: #071033;
-    --glass: rgba(255,255,255,0.06);
-    --accent: linear-gradient(135deg,#7c3aed,#06b6d4);
-    --btn: rgba(255,255,255,0.06);
-    --btn-ops: rgba(255,255,255,0.08);
-    --text: #e6eef8;
-    --muted: #98a8c7;
-  }
-  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;direction:rtl}
-  body{
-    background: radial-gradient(1000px 600px at 10% 10%, rgba(124,58,237,0.12), transparent 10%),
-                radial-gradient(800px 500px at 90% 90%, rgba(6,182,212,0.08), transparent 10%),
-                linear-gradient(180deg,var(--bg1),var(--bg2));
-    display:flex;align-items:center;justify-content:center;padding:20px;
-    color:var(--text);
-  }
-
-  .card{
-    width:100%;
-    max-width:420px;
-    border-radius:22px;
-    padding:20px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    box-shadow: 0 8px 30px rgba(2,6,23,0.7);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.04);
-  }
-
-  .header{
-    display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;
-  }
-  .brand{
-    display:flex;gap:10px;align-items:center;
-  }
-  .logo{
-    width:48px;height:48px;border-radius:12px;
-    background:var(--accent);
-    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;
-    box-shadow: 0 6px 18px rgba(124,58,237,0.18);
-  }
-  .title{
-    font-size:16px;font-weight:600;
-  }
-  .sub{font-size:12px;color:var(--muted);margin-top:2px}
-
-  .screen{
-    height:120px;border-radius:14px;padding:16px;display:flex;flex-direction:column;justify-content:center;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    margin-bottom:16px;box-shadow: inset 0 -6px 12px rgba(0,0,0,0.25);
-  }
-  .small{font-size:14px;color:var(--muted);text-align:right;word-break:break-all}
-  .big{font-size:32px;font-weight:700;text-align:right;word-break:break-all;margin-top:6px}
-
-  .pad{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap:10px;
-  }
-
-  button.btn{
-    border:0;padding:16px;border-radius:12px;font-size:20px;font-weight:600;
-    background:var(--btn);color:var(--text);box-shadow: 0 6px 12px rgba(2,6,23,0.6);
-    transition: transform .08s ease, box-shadow .12s ease, background .12s;
-    user-select:none;
-  }
-  button.btn:active{transform:translateY(2px);box-shadow: 0 3px 8px rgba(2,6,23,0.5)}
-
-  button.op{ background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); }
-  button.eq{
-    background: var(--accent); color:white; font-size:20px;
-    box-shadow: 0 8px 24px rgba(124,58,237,0.24); grid-column: span 2;
-  }
-  button.wide{grid-column: span 2;}
-  .muted{ color:var(--muted); font-weight:600; font-size:18px; }
-
-  /* small screens adjustments */
-  @media (max-width:360px){
-    .big{font-size:26px}
-    button.btn{padding:14px;font-size:18px;border-radius:10px}
-  }
-</style>
-</head>
-<body>
-  <div class="card" role="application" aria-label="آلة حاسبة مودرن">
-    <div class="header">
-      <div class="brand">
-        <div class="logo">حاسب</div>
-        <div>
-          <div class="title">آلة حاسبة</div>
-          <div class="sub">مودرن — Responsive</div>
-        </div>
-      </div>
-      <div style="text-align:right">
-        <div class="muted">ملاحظة</div>
-        <div class="sub">انسخ الأرقام وشارك النتيجة</div>
-      </div>
-    </div>
-
-    <div class="screen" id="screen">
-      <div class="small" id="history"></div>
-      <div class="big" id="output">0</div>
-    </div>
-
-    <div class="pad" id="pad">
-      <button class="btn op" data-action="clear">C</button>
-      <button class="btn op" data-action="back">⌫</button>
-      <button class="btn op" data-value="%">%</button>
-      <button class="btn op" data-value="/">÷</button>
-
-      <button class="btn" data-value="7">7</button>
-      <button class="btn" data-value="8">8</button>
-      <button class="btn" data-value="9">9</button>
-      <button class="btn op" data-value="*">×</button>
-
-      <button class="btn" data-value="4">4</button>
-      <button class="btn" data-value="5">5</button>
-      <button class="btn" data-value="6">6</button>
-      <button class="btn op" data-value="-">−</button>
-
-      <button class="btn" data-value="1">1</button>
-      <button class="btn" data-value="2">2</button>
-      <button class="btn" data-value="3">3</button>
-      <button class="btn op" data-value="+">+</button>
-
-      <button class="btn wide" data-value="0">0</button>
-      <button class="btn" data-value=".">.</button>
-      <button class="btn eq" data-action="equals">=</button>
-    </div>
-  </div>
-
-<script>
-  // عناصر الواجهة
-  const outputEl = document.getElementById('output');
-  const historyEl = document.getElementById('history');
-  const pad = document.getElementById('pad');
-
-  let expr = ''; // التعبير الداخلي (بالرموز البرمجية مثل * / + -)
-  let prettyHistory = '';
-
-  // Web Audio نغمة نقر خفيفة بدون ملفات خارجية
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  function clickTone(){
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.type = 'sine';
-    o.frequency.value = 900;
-    g.gain.value = 0.02;
-    o.connect(g); g.connect(audioCtx.destination);
-    o.start();
-    setTimeout(()=>{ o.stop(); }, 50);
-  }
-
-  function updateDisplay(){
-    outputEl.textContent = expr === '' ? '0' : expr.replace(/\*/g,'×').replace(/\//g,'÷');
-    historyEl.textContent = prettyHistory;
-  }
-
-  function safeEval(input){
-    // السماح فقط للأرقام والنقاط والعمليات والقوسين
-    if(!/^[0-9+\-*/().% \t]+$/.test(input)) throw 'غير مصرح';
-    // استبدال % => /100
-    // نحتاج تحويل عمليات النسبة بشكل بسيط: 50% => (50/100)
-    // نحلل كل حالة % بترتيب
-    let transformed = input.replace(/([0-9.]+)%/g, '($1/100)');
-    // eval مع ضبط الأخطاء
-    try{
-      const val = Function('"use strict";return ('+transformed+')')();
-      if (val === Infinity || val === -Infinity || Number.isNaN(val)) throw "NaN";
-      // قلّل عدد الأصفار بعد الفاصلة لو لزم
-      const fixed = (Math.round((val + Number.EPSILON) * 1000000000) / 1000000000);
-      return fixed;
-    }catch(e){
-      throw e;
-    }
-  }
-
-  pad.addEventListener('click', e=>{
-    const btn = e.target.closest('button');
-    if(!btn) return;
-    // شغّل النغمة
-    try { clickTone(); } catch(err){ /* audio may be blocked until user interacts */ }
-
-    const val = btn.getAttribute('data-value');
-    const action = btn.getAttribute('data-action');
-
-    if(action === 'clear'){
-      expr = '';
-      prettyHistory = '';
-      updateDisplay();
-      return;
-    }
-    if(action === 'back'){
-      expr = expr.slice(0,-1);
-      updateDisplay();
-      return;
-    }
-    if(action === 'equals'){
-      if(expr.trim() === '') return;
-      try{
-        const result = safeEval(expr);
-        prettyHistory = expr;
-        expr = String(result);
-        updateDisplay();
-      }catch(err){
-        outputEl.textContent = 'خطأ';
-        setTimeout(()=> updateDisplay(), 800);
-      }
-      return;
-    }
-
-    // قيود الإدخال الذكي
-    if(val){
-      // استبدال الرموز المرئية بالرموز البرمجية
-      let mapped = val;
-      if(val === '×') mapped = '*';
-      if(val === '÷') mapped = '/';
-
-      // منع نقطتين متتاليتين في نفس الرقم
-      if(mapped === '.'){
-        // احصل على آخر رقم كامل
-        const parts = expr.split(/[\+\-\*\/\(\)]/);
-        const last = parts[parts.length-1];
-        if(last.includes('.')) return;
-        if(last === '') mapped = '0.'; // لو بداية إدخال نقط
-      }
-
-      // منع بداية تعبير بعامل غير مناسب (مثل * /)
-      if(expr === '' && ['*','/','%','+'].includes(mapped)) return;
-
-      // منع تكرار عاملين متتالين
-      if(/[\+\-\*\/]/.test(mapped) && /[\+\-\*\/]$/.test(expr)){
-        // استبدل العامل الأخير بالعامل الجديد
-        expr = expr.slice(0,-1) + mapped;
-        updateDisplay();
-        return;
-      }
-
-      expr += mapped;
-      updateDisplay();
-    }
-  });
-
-  // دعم اللمس الطويل للحذف السريع
-  let backHoldTimer;
-  const backBtn = [...document.querySelectorAll('button')].find(b=>b.dataset.action==='back');
-  backBtn.addEventListener('touchstart', ()=>{
-    backHoldTimer = setInterval(()=>{
-      expr = expr.slice(0,-1);
-      updateDisplay();
-    }, 120);
-  });
-  ['touchend','touchcancel','mouseup','mouseleave'].forEach(ev=>{
-    backBtn.addEventListener(ev, ()=> clearInterval(backHoldTimer));
-  });
-
-  // نسخ النتيجة عند الضغط المطول على الشاشة
-  let screenHold;
-  const screen = document.getElementById('screen');
-  screen.addEventListener('contextmenu', e=> e.preventDefault());
-  screen.addEventListener('touchstart', (ev)=>{
-    screenHold = setTimeout(()=>{
-      const textToCopy = outputEl.textContent;
-      navigator.clipboard?.writeText(textToCopy).then(()=>{
-        historyEl.textContent = 'تم نسخ النتيجة';
-        setTimeout(()=> updateDisplay(), 900);
-      }).catch(()=>{/*ignore*/});
-    },800);
-  });
-  ['touchend','touchcancel','mouseup','mouseleave'].forEach(ev=>{
-    screen.addEventListener(ev, ()=> clearTimeout(screenHold));
-  });
-
-  // تهيئة العرض
-  updateDisplay();
-
-  // السماح بتشغيل صوت بعد أول تفاعل (بعض المتصفحات تمنع الصوت قبل التفاعل)
-  document.addEventListener('click', ()=> {
-    if(audioCtx.state === 'suspended') audioCtx.resume();
-  }, {once:true});
-</script>
-</body>
-</html>
+            <button class="equal" onclick="calculate()">=</
