@@ -1,122 +1,17 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آلة حاسبة</title>
+let display = document.getElementById("display");
 
-    <style>
-        body {
-            background: #eef1f7;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            font-family: "Cairo", sans-serif;
-        }
+function press(value) {
+    display.value += value;
+}
 
-        .calculator {
-            background: white;
-            padding: 25px;
-            border-radius: 30px;
-            width: 330px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+function clearDisplay() {
+    display.value = "";
+}
 
-        input {
-            width: 100%;
-            height: 80px;
-            font-size: 30px;
-            padding: 10px;
-            border-radius: 20px;
-            border: 2px solid #ccc;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        button {
-            height: 65px;
-            border: none;
-            border-radius: 18px;
-            font-size: 25px;
-            cursor: pointer;
-            background: #d9d9d9;
-        }
-
-        .op {
-            background: #78a7ff;
-            color: white;
-        }
-
-        .equal {
-            background: #3cb371;
-            color: white;
-        }
-
-        .clear {
-            grid-column: span 3;
-            background: #ff6b6b;
-            height: 70px;
-            color: white;
-            font-size: 26px;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="calculator">
-        <input type="text" id="display" disabled>
-
-        <div class="buttons">
-            <button onclick="press('7')">7</button>
-            <button onclick="press('8')">8</button>
-            <button onclick="press('9')">9</button>
-
-            <button class="op" onclick="press('/')">/</button>
-            <button onclick="press('4')">4</button>
-            <button onclick="press('5')">5</button>
-
-            <button onclick="press('6')">6</button>
-            <button class="op" onclick="press('*')">*</button>
-            <button onclick="press('1')">1</button>
-
-            <button onclick="press('2')">2</button>
-            <button onclick="press('3')">3</button>
-            <button class="op" onclick="press('-')">-</button>
-
-            <button onclick="press('0')">0</button>
-            <button onclick="press('.')">.</button>
-            <button class="equal" onclick="calculate()">=</button>
-
-            <button class="op" onclick="press('+')">+</button>
-
-            <button class="clear" onclick="clearDisplay()">مسح</button>
-        </div>
-    </div>
-
-    <script>
-        function press(value) {
-            document.getElementById("display").value += value;
-        }
-
-        function calculate() {
-            let disp = document.getElementById("display").value;
-            try {
-                document.getElementById("display").value = eval(disp);
-            } catch {
-                document.getElementById("display").value = "خطأ";
-            }
-        }
-
-        function clearDisplay() {
-            document.getElementById("display").value = "";
-        }
-    </script>
-
-</body>
-</html>
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = "Error";
+    }
+}
