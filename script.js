@@ -1,17 +1,17 @@
+let screen = document.getElementById("display");
+
 function press(value) {
-    let display = document.getElementById("display");
-    display.value += value;
+    screen.value += value;
 }
 
 function clearDisplay() {
-    document.getElementById("display").value = "";
+    screen.value = "";
 }
 
 function calculate() {
-    let display = document.getElementById("display");
     try {
-        display.value = eval(display.value);
+        screen.value = eval(screen.value);
     } catch {
-        display.value = "خطأ";
+        screen.value = "خطأ";
     }
 }
